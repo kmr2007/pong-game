@@ -40,9 +40,17 @@ const ball = {
   color: "WHITE",
 };
 const framePerSecond = 50;
+let computerLevel = 0.05;
 
 //Set Interval
 setInterval(game, 1000 / framePerSecond);
+
+// Event Listeners
+document.getElementById("easy-btn").addEventListener("click", easyBtnClicked);
+document
+  .getElementById("normal-btn")
+  .addEventListener("click", normalBtnClicked);
+document.getElementById("hard-btn").addEventListener("click", hardBtnClicked);
 
 // Functions
 function drawRect(x, y, w, h, color) {
@@ -107,7 +115,6 @@ function update() {
     resetBall();
   }
 
-  let computerLevel = 0.1;
   com.y += (ball.y - (com.y + com.height / 2)) * computerLevel;
 }
 function collision(b, p) {
@@ -136,4 +143,29 @@ canvas.addEventListener("mousemove", movePaddle);
 function movePaddle(evt) {
   let rect = canvas.getBoundingClientRect();
   user.y = evt.clientY - rect.top - user.height / 2;
+}
+
+// Difficulty Buttons
+function easyBtnClicked() {
+  document.getElementById("easy-btn").classList.add("active");
+  document.getElementById("normal-btn").classList.remove("active");
+  document.getElementById("hard-btn").classList.remove("active");
+
+  computerLevel = 0.05;
+}
+
+function normalBtnClicked() {
+  document.getElementById("easy-btn").classList.remove("active");
+  document.getElementById("normal-btn").classList.add("active");
+  document.getElementById("hard-btn").classList.remove("active");
+
+  computerLevel = 0.075;
+}
+
+function hardBtnClicked() {
+  document.getElementById("easy-btn").classList.remove("active");
+  document.getElementById("normal-btn").classList.remove("active");
+  document.getElementById("hard-btn").classList.add("active");
+
+  computerLevel = 0.1;
 }

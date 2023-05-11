@@ -116,6 +116,7 @@ function update() {
   }
 
   com.y += (ball.y - (com.y + com.height / 2)) * computerLevel;
+  user.y += (ball.y - (user.y + user.height / 2)) * computerLevel;
 }
 function collision(b, p) {
   p.top = p.y;
@@ -137,13 +138,6 @@ function game() {
   render();
 }
 
-// Control Paddles
-canvas.addEventListener("mousemove", movePaddle);
-
-function movePaddle(evt) {
-  let rect = canvas.getBoundingClientRect();
-  user.y = evt.clientY - rect.top - user.height / 2;
-}
 
 // Difficulty Buttons
 function easyBtnClicked() {
